@@ -2,7 +2,7 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 
 
-export default function PWT() {
+const PWT = (props: any) => {
   return (
     <>
       <Head>
@@ -13,8 +13,17 @@ export default function PWT() {
       </Head>
       <main className={styles.main}>
         <pre>PWT MicroFront</pre>
-
+        <pre>{JSON.stringify(props, null, 2)}</pre>
       </main>
     </>
   )
 }
+
+PWT.getInitialProps = async () => {
+  const swapi = await fetch('https://jsonplaceholder.typicode.com/todos/1').then(res => res.json());
+  console.log(swapi);
+  console.log('swapi');
+  return swapi;
+};
+
+export default PWT
